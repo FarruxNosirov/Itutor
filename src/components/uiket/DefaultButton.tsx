@@ -1,14 +1,12 @@
+import React from 'react';
 import {
+  ActivityIndicator,
+  GestureResponderEvent,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  ButtonProps,
-  TextProps,
-  GestureResponderEvent,
-  ActivityIndicator,
-} from "react-native";
-import React from "react";
-import { COLORS } from "../../constants/colors";
+} from 'react-native';
+import {COLORS} from '../../constants/colors';
 
 type Props = {
   title: string;
@@ -35,8 +33,7 @@ export default function DefaultButton(props: Props) {
     <TouchableOpacity
       style={[styles.button, props.ButtonStyle]}
       disabled={props.disabled}
-      onPress={props.onPress}
-    >
+      onPress={props.onPress}>
       {props.loading ? (
         <ActivityIndicator
           animating={props.loading}
@@ -52,7 +49,7 @@ export default function DefaultButton(props: Props) {
 
 DefaultButton.defaultProps = {
   ButtonStyle: {
-    backgroundColor: "#F4B840",
+    backgroundColor: '#F4B840',
     marginBottom: 25,
   },
   TextStyle: {
@@ -63,16 +60,16 @@ DefaultButton.defaultProps = {
 
 const styles = StyleSheet.create({
   button: {
-    width: "100%",
+    width: '100%',
     height: 55,
     borderRadius: 45,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 25,
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: "700",
-    color: "#000",
+    fontWeight: '700',
+    color: '#000',
   },
 });

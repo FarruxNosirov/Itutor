@@ -1,26 +1,17 @@
-/**
- * Button component
- * Renders a button and calls a function passed via onPress prop once tapped
- */
-
-import React, { Component } from "react";
-import {
-  StyleSheet, // CSS-like styles
-  Text, // Renders text
-  TouchableOpacity, // Pressable container
-  View, // Container component
-} from "react-native";
-import DefaultButton from "../../../components/uiket/DefaultButton";
-import { COLORS } from "../../../constants/colors";
+import React, {Component} from 'react';
+import {StyleSheet, View} from 'react-native';
+import DefaultButton from '../../../components/uiket/DefaultButton';
+import {COLORS} from '../../../constants/colors';
 
 export default class Button extends Component<any> {
-  render({ onPress } = this.props) {
+  render({onPress} = this.props) {
     return (
       <View style={styles.button}>
         <DefaultButton
           title="Продолжить"
-          ButtonStyle={{ backgroundColor: "#F4B840" }}
-          TextStyle={{ color: COLORS.white }}
+          // eslint-disable-next-line react-native/no-inline-styles
+          ButtonStyle={{backgroundColor: '#F4B840'}}
+          TextStyle={{color: COLORS.white}}
           onPress={onPress}
         />
       </View>
@@ -31,7 +22,7 @@ export default class Button extends Component<any> {
 const styles = StyleSheet.create({
   // Button container
   button: {
-    width: "100%",
+    width: '100%',
     paddingHorizontal: 20,
   },
 });

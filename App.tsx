@@ -1,7 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
-import AppRouter from './src/routes/AppRouter';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {StyleSheet} from 'react-native';
 import 'react-native-gesture-handler';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import AppRouter from './src/routes/AppRouter';
+import React from 'react';
 
 export default function App() {
   return (

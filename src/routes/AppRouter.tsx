@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -9,12 +9,10 @@ import {COLORS} from '../constants/colors';
 import {ROUTES} from '../constants/routes';
 import AuthStack from '../screens/Auth/AuthStack';
 
-import {createDrawerNavigator} from '@react-navigation/drawer';
 import Notification from '../components/uiket/notification/Notification';
 import PaidService from '../components/uiket/paidService/PaidService';
 import ReviewAllComponent from '../components/uiket/reviewAll/ReviewAllComponent';
 import Transaction from '../components/uiket/transaction/Transaction';
-import EducationChooseChat from '../screens/EducationHome/educationChat/educationChooseChat/EducationChooseChat';
 import TeacherInfoScreen from '../screens/EducationHome/teacherEducation/teacherInfoScreen/TeacherInfoScreen';
 
 import NewsCartInfo from '../screens/StudentHome/home/ServiceNews/NewsCartInfo/NewsCartInfo';
@@ -25,11 +23,10 @@ import CategoriesSetting from '../screens/StudentHome/home/categories/categories
 import StudentInfoScreen from '../screens/StudentHome/home/categories/studentInfoScreen/StudentInfoScreen';
 import StudentReviews from '../screens/StudentHome/home/categories/studentReviews/StudentReviews';
 import OurExpertAll from '../screens/StudentHome/home/ourExperts/OurExpertAll/OurExpertAll';
-import TeacherChooseChat from '../screens/TeacherHome/chatTeacher/teacherChooseChat/teacherChooseChat';
-import StudentNavigation from '../screens/TabNavigations/StudentNavigation';
 import EducationNavigation from '../screens/TabNavigations/EducationNavigation';
+import StudentNavigation from '../screens/TabNavigations/StudentNavigation';
 import TeacherNavigation from '../screens/TabNavigations/TeacherNavigation';
-const Drawer = createDrawerNavigator();
+
 let Stack = createNativeStackNavigator();
 
 export default function AppRouter() {
@@ -107,5 +104,3 @@ export default function AppRouter() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

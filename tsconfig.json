@@ -2,7 +2,10 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",     
   "compilerOptions": {
-    "skipLibCheck": true 
+    "skipLibCheck": true ,
+    "target": "es2016",
+    "module": "commonjs",
+    "allowJs": true
                              
   }
 }

@@ -1,18 +1,16 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import {
-  Dimensions, // Detects screen dimensions
-  Platform, // Detects platform running the app
-  ScrollView, // Handles navigation between screens
-  StyleSheet, // CSS-like styles
+  Dimensions,
+  Platform,
+  ScrollView,
+  StyleSheet,
   View, // Container component
-} from "react-native";
-import Button from "./Button";
-import { useNavigation } from "@react-navigation/native";
-import { ROUTES } from "../../../constants/routes";
-import NavigationService from "../../../NavigationService";
+} from 'react-native';
+import NavigationService from '../../../NavigationService';
+import Button from './Button';
 
 // Detect screen width and height
-const { width, height } = Dimensions.get("window");
+const {width, height} = Dimensions.get('window');
 
 export default class Swiper extends Component<any> {
   // static navigation = useNavigation();
@@ -43,6 +41,8 @@ export default class Swiper extends Component<any> {
   };
 
   state = this.initState(this.props);
+  internals: {isScrolling: boolean; offset: number};
+  scrollView: any;
 
   /**
    * Initialize the state
@@ -77,7 +77,7 @@ export default class Swiper extends Component<any> {
    * Scroll begin handler
    * @param {object} e native event
    */
-  onScrollBegin = (e) => {
+  onScrollBegin = e => {
     // Update internal isScrolling state
     this.internals.isScrolling = true;
   };
@@ -86,7 +86,7 @@ export default class Swiper extends Component<any> {
    * Scroll end handler
    * @param {object} e native event
    */
-  onScrollEnd = (e) => {
+  onScrollEnd = e => {
     // Update internal isScrolling state
     this.internals.isScrolling = false;
 
@@ -95,7 +95,7 @@ export default class Swiper extends Component<any> {
       e.nativeEvent.contentOffset
         ? e.nativeEvent.contentOffset.x
         : // When scrolled with .scrollTo() on Android there is no contentOffset
-          e.nativeEvent.position * this.state.width
+          e.nativeEvent.position * this.state.width,
     );
   };
 
@@ -103,13 +103,13 @@ export default class Swiper extends Component<any> {
    * Drag end handler
    * @param {object} e native event
    */
-  onScrollEndDrag = (e) => {
+  onScrollEndDrag = e => {
     const {
-        contentOffset: { x: newOffset },
+        contentOffset: {x: newOffset},
       } = e.nativeEvent,
-      { children } = this.props,
-      { index } = this.state,
-      { offset } = this.internals;
+      {children} = this.props,
+      {index} = this.state,
+      {offset} = this.internals;
 
     // Update internal isScrolling state
     // if swiped right on the last slide
@@ -126,7 +126,7 @@ export default class Swiper extends Component<any> {
    * Update index after scroll
    * @param {object} offset content offset
    */
-  updateIndex = (offset) => {
+  updateIndex = offset => {
     const state = this.state,
       diff = offset - this.internals.offset,
       step = state.width;
@@ -163,13 +163,13 @@ export default class Swiper extends Component<any> {
       y = 0;
 
     // Call scrollTo on scrollView component to perform the swipe
-    this.scrollView && this.scrollView.scrollTo({ x, y, animated: true });
+    this.scrollView && this.scrollView.scrollTo({x, y, animated: true});
 
     // Update internal scroll state
     this.internals.isScrolling = true;
 
     // Trigger onScrollEnd manually on android
-    if (Platform.OS === "android") {
+    if (Platform.OS === 'android') {
       setImmediate(() => {
         this.onScrollEnd({
           nativeEvent: {
@@ -187,15 +187,14 @@ export default class Swiper extends Component<any> {
   renderScrollView = (pages: any[]) => {
     return (
       <ScrollView
-        ref={(component) => {
+        ref={component => {
           this.scrollView = component;
         }}
         {...this.props}
         contentContainerStyle={[styles.wrapper, this.props.style]}
         onScrollBeginDrag={this.onScrollBegin}
         onMomentumScrollEnd={this.onScrollEnd}
-        onScrollEndDrag={this.onScrollEndDrag}
-      >
+        onScrollEndDrag={this.onScrollEndDrag}>
         {pages.map((page, i) => (
           // Render each slide inside a View
           <View style={[styles.fullScreen, styles.slide]} key={i}>
@@ -223,9 +222,9 @@ export default class Swiper extends Component<any> {
       dots.push(
         key === this.state.index
           ? // Active dot
-            React.cloneElement(ActiveDot, { key })
+            React.cloneElement(ActiveDot, {key})
           : // Other dots
-            React.cloneElement(Dot, { key })
+            React.cloneElement(Dot, {key}),
       );
     }
 
@@ -242,17 +241,15 @@ export default class Swiper extends Component<any> {
 
   renderButton = () => {
     const lastScreen = this.state.index === this.state.total - 1;
-    const { navigation } = this.props;
 
     return (
       <View
         pointerEvents="box-none"
-        style={[styles.buttonWrapper, styles.fullScreen]}
-      >
+        style={[styles.buttonWrapper, styles.fullScreen]}>
         {lastScreen ? (
           <Button
             text="Start Now"
-            onPress={() => NavigationService.navigate("STUDENTNAVIGATION")}
+            onPress={() => NavigationService.navigate('STUDENTNAVIGATION')}
           />
         ) : (
           // Or this one otherwise
@@ -265,7 +262,7 @@ export default class Swiper extends Component<any> {
   /**
    * Render the component
    */
-  render = ({ children } = this.props) => {
+  render = ({children} = this.props) => {
     return (
       <View style={[styles.container, styles.fullScreen]}>
         {/* Render screens */}
@@ -289,28 +286,28 @@ const styles = StyleSheet.create({
   },
   // Main container
   container: {
-    backgroundColor: "transparent",
-    position: "relative",
+    backgroundColor: 'transparent',
+    position: 'relative',
   },
   // Slide
   slide: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
   },
   // Pagination indicators
   pagination: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 110,
     left: 0,
     right: 0,
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    backgroundColor: "transparent",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    backgroundColor: 'transparent',
   },
   // Pagination dot
   dot: {
-    backgroundColor: "rgba(0,0,0,.25)",
+    backgroundColor: 'rgba(0,0,0,.25)',
     width: 8,
     height: 8,
     borderRadius: 4,
@@ -321,30 +318,30 @@ const styles = StyleSheet.create({
   },
 
   activeDot: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
   },
   buttonWrapper: {
-    backgroundColor: "transparent",
-    flexDirection: "column",
-    position: "absolute",
+    backgroundColor: 'transparent',
+    flexDirection: 'column',
+    position: 'absolute',
     bottom: 71,
     left: 0,
     flex: 1,
     paddingHorizontal: 10,
     paddingVertical: 40,
-    justifyContent: "flex-end",
-    alignItems: "center",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
   goBack: {
-    backgroundColor: "transparent",
-    flexDirection: "column",
-    position: "absolute",
+    backgroundColor: 'transparent',
+    flexDirection: 'column',
+    position: 'absolute',
     left: 0,
     flex: 1,
     paddingHorizontal: 10,
     paddingVertical: 40,
-    justifyContent: "flex-end",
-    alignItems: "center",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     top: 100,
   },
 });
